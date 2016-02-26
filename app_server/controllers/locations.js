@@ -84,39 +84,86 @@ var renderDetailPage = function (req, res, locDetail) {//Add locDetail parameter
 
 /* GET 'Location info' page */
 module.exports.locationInfo = function(req, res){
-	var requestOptions, path;
-	//Get locationid parameter from URL and append it to API path
-	path = "/api/locations/" + req.params.locationid;
-	requestOptions = {
-		//Set all request options needed to call API
-		url : apiOptions.server + path,
-		method : "GET",
-		json : {}
-	};
-	//Call renderDetailPage function when API has responded
-	request(requestOptions,function(err, response, body) {
-		var data = body;
-		//Check for successful response from API
-		if (response.statusCode === 200) {
-			data.coords = {
-				lng : body.coords[0],
-				lat : body.coords[1]
-			};
-		//If check wasn’t successful, pass error through to _showError function
-		}else {
-			_showError(req, res, response.statusCode);
-		}
-		renderDetailPage(req, res, data);
+	getLocationInfo(req, res, function(req, res, responseData) {
+		renderDetailPage(req, res, responseData);
+	});
+};
+
+//locDetail is the third parameter from getLocationInfo(callback)
+var renderReviewForm = function (req, res, locDetail) {
+	res.render('location-review-form', {
+		title: 'Review ' + locDetail.name + ' on Beach Locators',
+		pageHeader: { title: 'Review ' + locDetail.name },
+		error: req.query.err
 	});
 };
 /* GET 'Add review' page */
 module.exports.addReview = function(req, res){
-	res.render('location-review-form', { 
-		title: 'Review Starcups on Loc8r',
-		pageHeader: { title: 'Review Starcups' }
+	//Also call getLocationInfo from addReview controller, but this time pass renderReviewForm in callback
+	getLocationInfo(req, res, function(req, res, responseData) {
+		renderReviewForm(req, res, responseData);
 	});
 };
 
+module.exports.doAddReview = function(req, res){
+	var requestOptions, path, locationid, postdata;
+		//Get location ID from URL to construct API URL
+		locationid = req.params.locationid;
+		path = "/api/locations/" + locationid + '/reviews';
+		//Create data object to send to API using submitted form data
+		postdata = {
+			author: req.body.name,
+			rating: parseInt(req.body.rating, 10),
+			reviewText: req.body.review
+		};
+		//Set request options, including path, setting POST method and passing submitted form data into json parameter
+		requestOptions = {
+			url : apiOptions.server + path,
+			method : "POST",
+			json : postdata
+		};
+		//If any of three required data fields are falsey, then redirect to Add Review page, appending query string used to display error message
+		if (!postdata.author || !postdata.rating || !postdata.reviewText) {
+			res.redirect('/location/' + locationid + '/reviews/new?err=val');
+		} else {
+			//Make the request
+			request(requestOptions,function(err, response, body) {
+			//Redirect to Details page if review was added successfully or show an error page if API returned an error
+			if (response.statusCode === 201) {
+				res.redirect('/location/' + locationid);
+			} else if (response.statusCode === 400 && body.name && body.name === "ValidationError" ) {
+				res.redirect('/location/' + locationid + '/reviews/new?err=val');
+			} else {
+				_showError(req, res, response.statusCode);
+			}
+		});
+	}
+};
+
+
+//getLocationInfo accepts callback as thirdparameter 
+var getLocationInfo = function (req, res, callback) {
+	var requestOptions, path;
+	path = "/api/locations/" + req.params.locationid;
+	requestOptions = {
+		url : apiOptions.server + path,
+		method : "GET",
+		json : {}
+	};
+	request(requestOptions,function(err, response, body) {
+		var data = body;
+		if (response.statusCode === 200) {
+			data.coords = {
+			lng : body.coords[0],
+			lat : body.coords[1]
+			};
+			//Following successful API response, invoke callback ninstead of named function
+			callback(req, res, data);
+		} else {
+			_showError(req, res, response.statusCode);
+		}
+	});
+};
 
 var _formatDistance = function (distance) {
 	if (!distance){
