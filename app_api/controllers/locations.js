@@ -10,11 +10,11 @@ var theEarth = (function() {
   var earthRadius = 6371; // km, miles is 3959
 
   var getDistanceFromRads = function(rads) {
-    return parseFloat(rads * earthRadius);
+    return parseFloat((rads / earthRadius) * 10);
   };
 
   var getRadsFromDistance = function(distance) {
-    return parseFloat(distance / earthRadius);
+    return parseFloat(distance * earthRadius);
   };
 
   return {
@@ -37,6 +37,7 @@ module.exports.locationsListByDistance = function(req, res) {
   var geoOptions = {
     spherical: true,
     maxDistance: theEarth.getRadsFromDistance(maxDistance),
+	
     num: 10
   };
   if ((!lng && lng!==0) || (!lat && lat!==0) || ! maxDistance) {
