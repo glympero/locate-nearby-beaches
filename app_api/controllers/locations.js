@@ -38,6 +38,7 @@ module.exports.locationsListByDistance = function(req, res) {
     spherical: true,
     maxDistance: theEarth.getRadsFromDistance(maxDistance),
 	
+	
     num: 10
   };
   if ((!lng && lng!==0) || (!lat && lat!==0) || ! maxDistance) {
