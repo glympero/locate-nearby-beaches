@@ -145,6 +145,7 @@ module.exports.doAddReview = function(req, res){
 
 //getLocationInfo accepts callback as thirdparameter 
 var getLocationInfo = function (req, res, callback) {
+	
 	var requestOptions, path;
 	path = "/api/locations/" + req.params.locationid;
 	requestOptions = {
