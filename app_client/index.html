@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="beachLocator">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Beach Locator</title>
+		<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/bootstrap/css/agency.css">
+		<link rel="stylesheet" href="/stylesheets/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+		<link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+	</head>
+	<body ng-view>
+		<script src="/angular/angular.min.js"></script>
+		<script src="/angular/angular-route.min.js"></script>
+		<script src="/angular/angular-sanitize.min.js"></script>
+		<script src="/app.js"></script>
+		<script src="/common/directives/pageHeader/pageHeader.directive.js"></script>
+		<script src="/home/home.controller.js"></script>
+		<script src="/about/about.controller.js"></script>
+		<script src="/locationDetail/locationDetail.controller.js"></script>
+			
+		<script src="/common/services/data.service.js"></script>
+		<script src="/common/services/geolocation.service.js"></script>
+		<script src="/common/directives/ratingStars/ratingStars.directive.js"></script>	
+		<script src="/common/directives/footerGeneric/footerGeneric.directive.js"></script>
+		<script src="/common/directives/navigation/navigation.directive.js"></script>
+		<script src="/common/filters/formatDistance.filter.js"></script>
+		<script src="/common/filters/addHtmlLineBreaks.filter.js"></script>
+		<script src="/javascripts/jquery-1.12.0.min.js"></script>
+		<script src="/bootstrap/js/bootstrap.min.js"></script>
+		<script src="/javascript/validation.js"></script>
+	</body>
+</html>

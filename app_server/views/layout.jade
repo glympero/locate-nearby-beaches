@@ -1,10 +1,10 @@
 doctype html
-html
+html(ng-app='beachLocator')
   head
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title= title
     link(rel='stylesheet' href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic')
-    link(rel='stylesheet' href='href="http://fonts.googleapis.com/css?family=Montserrat:400,700')
+    
 
     link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
     link(rel='stylesheet', href='/bootstrap/css/agency.css')
@@ -31,7 +31,8 @@ html
              li
                a(href='/about/') About
      .container
-       block content
+        div(ng-view)
+          block content
   footer
     .row
       .col-xs-12
@@ -39,7 +40,13 @@ html
    
       
       script(src='/angular/angular.min.js')
-      script(src='/angular/locateme.js')
+      script(src='/angular/angular-route.min.js')
+      script(src='/app.js')
+      script(src='/home/home.controller.js')
+      script(src='/common/services/data.service.js')
+      script(src='/common/services/geolocation.service.js')
+      script(src='/common/directives/ratingStars/ratingStars.directive.js')
+      script(src='/common/filters/formatDistance.filter.js')
       script(src='/javascripts/jquery-1.12.0.min.js')
       script(src='/bootstrap/js/bootstrap.min.js')
       script(src='/javascripts/validation.js')

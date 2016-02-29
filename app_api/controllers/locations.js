@@ -104,6 +104,7 @@ module.exports.locationsCreate = function(req, res) {
 };
  
 module.exports.locationsReadOne = function(req, res) {
+	console.log("API INSIDE");
 	if (req.params && req.params.locationid) {
 		Loc.findById(req.params.locationid).exec(function(err, location) {
 			if (!location) {

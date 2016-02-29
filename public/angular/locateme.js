@@ -33,10 +33,14 @@ var ratingStars = function () {
 
 var beachLocatorData = function ($http) {
 	var locationByCoords = function (lat, lng) {
-	return $http.get('/api/locations?lng=' + lng + '&lat=' + lat + '&maxDistance=20');
+		return $http.get('/api/locations?lng=' + lng + '&lat=' + lat + '&maxDistance=20');
+	};
+	var locationById = function (locationid) {
+		return $http.get('/api/locations/' + locationid);
 	};
 	return {
-		locationByCoords : locationByCoords
+		locationByCoords : locationByCoords,
+		locationById : locationById
 	};
 };
 
@@ -84,9 +88,6 @@ var locationListCtrl = function ($scope, beachLocatorData, geolocation) {
 	};
 	geolocation.getPosition($scope.getData,$scope.showError,$scope.noGeo);
 };
-
-
-
 
 angular
 	.module('beachLocator')
