@@ -2,7 +2,8 @@
 angular
     .module('beachLocator')
     .service('beachData', beachData);
-
+	
+beachData.$inject = ['$http'];
 function beachData ($http) {
   var locationByCoords = function (lat, lng) {
 	 return $http.get('/api/locations?lng=' + lng + '&lat=' + lat + '&maxDistance=20');

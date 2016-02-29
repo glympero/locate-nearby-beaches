@@ -2,7 +2,7 @@
 angular
     .module('beachLocator')
     .controller('homeCtrl', homeCtrl);
-	
+homeCtrl.$inject = ['$scope', 'beachData', 'geoloc'];
 function homeCtrl ($scope, beachData, geoloc) {
 	var vm = this;
 	vm.pageHeader = {
