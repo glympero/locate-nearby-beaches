@@ -1,5 +1,5 @@
 (function () {
-	angular.module('beachLocator', ['ngRoute', 'ngSanitize']);
+	angular.module('beachLocator', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
 	
 	
 	
