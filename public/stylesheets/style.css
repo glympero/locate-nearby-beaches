@@ -8,6 +8,12 @@
 	margin-right: 10px;
 }
 
+.meinfodia img+span.badge {
+    position: relative;
+    top: 80px;
+    right: -147px;
+}
+
 
 
 

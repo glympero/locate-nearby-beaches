@@ -9,7 +9,8 @@
     var vm = this;
 
     vm.pageHeader = {
-      title: 'Create a new Beach Locator account'
+      title: 'Register',
+      strapline: 'Create a new Beach Locator account'
     };
 
     vm.credentials = {

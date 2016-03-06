@@ -15,7 +15,8 @@
 			.success(function (data) {
 			vm.data = { location: data };
 			vm.pageHeader = {
-				title: vm.data.location.name
+				title: vm.data.location.name,
+				strapline: vm.data.location.address
 			};
 			})
 			.error(function (e) {

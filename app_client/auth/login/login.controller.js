@@ -9,7 +9,8 @@
     var vm = this;
 
     vm.pageHeader = {
-      title: 'Sign in to Beach Locator'
+      title: 'Sign in',
+      strapline: 'Enhancing your experience'
     };
 
     vm.credentials = {

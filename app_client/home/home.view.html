@@ -1,34 +1,38 @@
 
 <navigation></navigation>
-
+<page-header content="vm.pageHeader"></page-header>
 <div class="container">
   
-<page-header content="vm.pageHeader"></page-header>
-
   <div class="row">
-    <div class="col-xs-12 col-sm-8">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <label for="filter">Filter results</label>
       <input id="filter" type="text", name="filter", ng-model="textFilter">
       <div class="error">{{ vm.message }}</div>
-      <div class="row list-group">
-        <div class="col-xs-12 list-group-item" ng-repeat="location in vm.data.locations | filter : textFilter">
-          <h4>
+      <hr>
+      <div class="post-preview">
+        <div ng-repeat="location in vm.data.locations | filter : textFilter">
+          <h3>
             <a href="/#/location/{{ location._id }}">{{ location.name }}</a>
             <small class="rating-stars" rating-stars rating="location.rating"></small>
-            <span class="badge pull-right badge-default">{{ location.distance | formatDistance }}</span>
-          </h4>
-          <p class="address">{{ location.address }}</p>
+             <span class="meinfodia">
+               <img src="https://s-media-cache-ak0.pinimg.com/736x/8c/3e/74/8c3e74194a38aa3061dce227768ed435.jpg" class="img-rounded pull-right" alt="Cinque Terre" width="150" height="100">
+            <span class="badge pull-right badge-primary">{{ location.distance | formatDistance }}</span>
+             </span>
+            
+          </h3>
+          <h5 class="address" style='font-weight:normal;'>{{ location.address }}</h5>
           <p>
-            <span class="label label-warning label-facility" ng-repeat="facility in location.facilities">
+            <span class="label label-success label-facility" ng-repeat="facility in location.facilities">
               {{ facility }}
             </span>
           </p>
+           <hr>
         </div>
+        
       </div>
+      
     </div>
-    <div class="col-xs-12 col-sm-4">
-      <p class="lead">{{ vm.sidebar.content }}</p>
-    </div>
+    
   </div>
 
   <footer-generic></footer-generic>
