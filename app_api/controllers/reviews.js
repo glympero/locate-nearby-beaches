@@ -1,26 +1,31 @@
 var mongoose = require('mongoose');
 var Loc = mongoose.model('Location');
+var User = mongoose.model('User');
 
 var sendJsonResponse = function(res, status, content) {
 	res.status(status);
 	res.json(content);
 };
 
-module.exports.reviewsCreate = function(req, res) {
-	var locationid = req.params.locationid;
-	if (locationid) {
-		Loc.findById(locationid).select('reviews').exec(function(err, location) {
-		if (err) {
-			sendJsonResponse(res, 400, err);
+module.exports.reviewsCreate = function (req, res) {
+	//Call getAuthor function, and pass original controller code in as a callback; pass user’s name into callback
+	getAuthor(req, res, function (req, res, userName) {
+		var locationid = req.params.locationid;
+		if (locationid) {
+			Loc.findById(locationid).select('reviews').exec(function (err, location) {
+				if (err) {
+					sendJsonResponse(res, 400, err);
+				} else {
+					//Pass user’s name into doAddReview function
+					doAddReview(req, res, location, userName);
+				}
+			});
 		} else {
-			doAddReview(req, res, location);
+			sendJsonResponse(res, 404, {
+				"message": "Not found, locationid required"
+			});
 		}
 	});
-	} else {
-		sendJsonResponse(res, 404, {
-		"message": "Not found, locationid required"
-		});
-	}
 };
  
  module.exports.reviewsReadOne = function (req, res) {
@@ -173,7 +178,7 @@ module.exports.reviewsDeleteOne = function(req, res) {
 };
  
 //When provided with a parent document …
-var doAddReview = function(req, res, location) {
+var doAddReview = function(req, res, location, author) {
 	if (!location) {
 		sendJsonResponse(res, 404, {
 		"message": "locationid not found"
@@ -181,7 +186,7 @@ var doAddReview = function(req, res, location) {
 	} else {
 		//push new data into subdocument array…
 		location.reviews.push({
-		author: req.body.author,
+		author: author,
 		rating: req.body.rating,
 		reviewText: req.body.reviewText
 	});
@@ -233,4 +238,36 @@ var doSetAverageRating = function(location) {
 			}
 		});
 	}
+};
+
+var getAuthor = function (req, res, callback) {
+	console.log("Finding author with email " + req.payload.email);
+	//Validate that JWT information is on request object
+	if (req.payload.email) {
+		User
+			//Use email address to find user
+			.findOne({ email: req.payload.email })
+			.exec(function (err, user) {
+			if (!user) {
+				sendJsonResponse(res, 404, {
+					"message": "User not found"
+				});
+				return;
+			} else if (err) {
+				console.log(err);
+				sendJsonResponse(res, 404, err);
+				return;
+			}
+			console.log(user);
+			//Run callback, passing user’s name
+			callback(req, res, user.name);
+		});
+
+	} else {
+		sendJsonResponse(res, 404, {
+			"message": "User not found"
+		});
+		return;
+	}
+
 };

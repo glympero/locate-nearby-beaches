@@ -6,6 +6,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 mongoose.connect(dbURI);
 require('./locations');
+require('./users');
 
 mongoose.connection.on('connected', function () {
 		console.log('Mongoose connected to ' + dbURI);
