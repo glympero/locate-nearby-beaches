@@ -1,6 +1,6 @@
 .review {padding-bottom: 5px;}
 .panel-body.review-container {padding-top: 0;}
-.review-header {margin-bottom: 10px;}
+.review-header {margin-bottom: 0px;}
 .reviewAuthor {margin: 0 5px;}
 .reviewTimestamp {color: #ccc;}
 #filter {margin-left: 10px;}
@@ -8,10 +8,18 @@
 	margin-right: 10px;
 }
 
+.review-text{
+	padding-left: 10px;
+}
+
 .meinfodia img+span.badge {
     position: relative;
     top: 80px;
     right: -147px;
+}
+
+.centered {
+	text-align: justify;
 }
 
 
