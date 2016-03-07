@@ -37,8 +37,6 @@ module.exports.locationsListByDistance = function(req, res) {
   var geoOptions = {
     spherical: true,
     maxDistance: theEarth.getRadsFromDistance(maxDistance),
-	
-	
     num: 10
   };
   if ((!lng && lng!==0) || (!lat && lat!==0) || ! maxDistance) {
@@ -57,6 +55,7 @@ module.exports.locationsListByDistance = function(req, res) {
       sendJSONresponse(res, 404, err);
     } else {
       locations = buildLocationList(req, res, results, stats);
+	  console.log('Loc Results', locations);
       sendJSONresponse(res, 200, locations);
     }
   });
@@ -70,6 +69,7 @@ var buildLocationList = function(req, res, results, stats) {
       name: doc.obj.name,
       address: doc.obj.address,
       rating: doc.obj.rating,
+	  image: doc.obj.image,
       facilities: doc.obj.facilities,
       _id: doc.obj._id
     });
@@ -83,6 +83,7 @@ module.exports.locationsCreate = function(req, res) {
 		address: req.body.address,
 		facilities: req.body.facilities.split(","),
 		coords: [parseFloat(req.body.lng), parseFloat(req.body.lat)],
+		image: req.body.image,
 		openingTimes: [{
 			days: req.body.days1,
 			opening: req.body.opening1,
@@ -104,7 +105,7 @@ module.exports.locationsCreate = function(req, res) {
 };
  
 module.exports.locationsReadOne = function(req, res) {
-	console.log("API INSIDE");
+	
 	if (req.params && req.params.locationid) {
 		Loc.findById(req.params.locationid).exec(function(err, location) {
 			if (!location) {
@@ -123,6 +124,7 @@ module.exports.locationsReadOne = function(req, res) {
 			"message": "No locationid in request"
 		});
 	}
+	
 };
  
 module.exports.locationsUpdateOne = function(req, res) {
@@ -150,8 +152,10 @@ module.exports.locationsUpdateOne = function(req, res) {
 		//Update paths with values from submitted form
 		location.name = req.body.name;
 		location.address = req.body.address;
+		location.image = req.body.image;
 		location.facilities = req.body.facilities.split(",");
 		location.coords = [parseFloat(req.body.lng),
+		
 	parseFloat(req.body.lat)];
 		location.openingTimes = [{
 			days: req.body.days1,

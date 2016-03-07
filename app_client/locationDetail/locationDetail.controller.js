@@ -14,9 +14,11 @@
 		beachData.locationById(vm.locationid)
 			.success(function (data) {
 			vm.data = { location: data };
+			
 			vm.pageHeader = {
 				title: vm.data.location.name,
-				strapline: vm.data.location.address
+				strapline: vm.data.location.address,
+				image: vm.data.location.image
 				};
 			})
 			.error(function (e) {

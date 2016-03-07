@@ -10,7 +10,8 @@
 
     vm.pageHeader = {
       title: 'Register',
-      strapline: 'Create a new Beach Locator account'
+      strapline: 'Create a new Beach Locator account',
+      image: '/images/home-bg.jpg'
     };
 
     vm.credentials = {

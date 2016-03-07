@@ -17,6 +17,7 @@ var reviewSchema = new mongoose.Schema({
 var locationSchema = new mongoose.Schema({
 	name: {type: String, required: true},
 	address: String,
+	image: String,
 	rating: {type: Number, "default": 0, min: 0, max: 5},
 	facilities: [String],
 	coords: {type: [Number], index: '2dsphere'},

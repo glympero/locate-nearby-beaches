@@ -7,7 +7,8 @@ function homeCtrl ($scope, beachData, geoloc) {
 	var vm = this;
 	vm.pageHeader = {
 		title: 'Beach Locator',
-		strapline: 'Find beaches near you!'
+		strapline: 'Find beaches near you!',
+		image: '/images/home-bg.jpg'
 	};
 	vm.sidebar = {
 		content: "Looking for beaches and sun "

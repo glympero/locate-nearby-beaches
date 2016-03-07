@@ -10,7 +10,8 @@
 
     vm.pageHeader = {
       title: 'Sign in',
-      strapline: 'Enhancing your experience'
+      strapline: 'Enhancing your experience',
+      image: '/images/home-bg.jpg'
     };
 
     vm.credentials = {

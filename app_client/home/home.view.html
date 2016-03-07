@@ -12,10 +12,10 @@
       <div class="post-preview">
         <div ng-repeat="location in vm.data.locations | filter : textFilter">
           <h3>
-            <a href="/#/location/{{ location._id }}">{{ location.name }}</a>
+            <a href="/#/location/{{ location._id }}/">{{ location.name }}</a>
             <small class="rating-stars" rating-stars rating="location.rating"></small>
              <span class="meinfodia">
-               <img src="https://s-media-cache-ak0.pinimg.com/736x/8c/3e/74/8c3e74194a38aa3061dce227768ed435.jpg" class="img-rounded pull-right" alt="Cinque Terre" width="150" height="100">
+               <img src="{{ location.image }}" class="img-rounded pull-right" alt="Cinque Terre" width="150" height="100">
             <span class="badge pull-right badge-primary">{{ location.distance | formatDistance }}</span>
              </span>
             
@@ -26,6 +26,7 @@
               {{ facility }}
             </span>
           </p>
+          
            <hr>
         </div>
         
