@@ -17,7 +17,7 @@
 			vm.pageHeader = {
 				title: vm.data.location.name,
 				strapline: vm.data.location.address
-			};
+				};
 			})
 			.error(function (e) {
 			console.log(e);
