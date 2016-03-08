@@ -6,7 +6,7 @@
 	beachData.$inject = ['$http', 'authentication'];
 	function beachData($http, authentication) {
 		var locationByCoords = function (lat, lng) {
-			return $http.get('/api/locations?lng=' + lng + '&lat=' + lat + '&maxDistance=20');
+			return $http.get('/api/locations?lng=' + lng + '&lat=' + lat + '&maxDistance=20000000');
 		};
 		var locationById = function (locationid) {
 			return $http.get('/api/locations/' + locationid);
