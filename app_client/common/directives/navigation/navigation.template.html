@@ -11,6 +11,14 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
+        <li ng-show="navvm.isAdmin" class="dropdown">
+          <a href="" class="dropdown-toggle" data-toggle="dropdown">Admin Panel <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+            <li>
+              <a class="dropdown-item" ng-click="navvm.popupBeachForm()">Add Beach</a>
+            </li>
+          </ul>
+        </li>
         <li>
           <a href="/#">Home</a>
         </li>
@@ -24,7 +32,7 @@
           <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ navvm.currentUser.name }} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li>
-              <a href="/" ng-click="navvm.logout()">Logout</a>
+              <a href="/" class="dropdown-item" ng-click="navvm.logout()">Logout</a>
             </li>
           </ul>
         </li>

@@ -269,5 +269,4 @@ var getAuthor = function (req, res, callback) {
 		});
 		return;
 	}
-
 };

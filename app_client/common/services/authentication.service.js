@@ -29,7 +29,17 @@
         return false;
       }
     };
-
+    var isAdmin = function() {
+      if(isLoggedIn()){
+        var cUser = currentUser();
+          if (cUser.email === "glympe77@gmail.com" && cUser.name === "admin"){
+            return true;
+          }else{
+            return false;
+          }
+        return false;
+      }
+    };
     var currentUser = function() {
       if(isLoggedIn()){
         var token = getToken();
@@ -63,6 +73,7 @@
       saveToken : saveToken,
       getToken : getToken,
       isLoggedIn : isLoggedIn,
+      isAdmin : isAdmin,
       register : register,
       login : login,
       logout : logout

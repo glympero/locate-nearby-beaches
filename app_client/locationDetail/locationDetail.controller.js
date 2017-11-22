@@ -45,11 +45,5 @@
 				vm.data.location.reviews.push(data);
 			});
 		};
-
-
-
-
 	}
-
-
 })();

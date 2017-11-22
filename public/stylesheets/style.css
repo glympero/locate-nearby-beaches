@@ -22,6 +22,24 @@
 	text-align: justify;
 }
 
+.dropdown-item {
+	color:black !important;
+	
+}
+
+h1 {
+	color: white;
+}
+
+.control-label {
+	text-align: left !important;
+	color: darkgrey;
+}
+
+.modal-title {
+	color: orange;
+}
+
 
 
 

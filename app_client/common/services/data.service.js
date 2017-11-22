@@ -18,10 +18,18 @@
 				}
 			});
 		};
+		var addLocation = function(data){
+			return $http.post('/api/locations', data, {
+				header: {
+					Authorization: 'Bearer ' + authentication.getToken()
+				}
+			});
+		};
 		return {
 			locationByCoords: locationByCoords,
 			locationById: locationById,
-			addReviewById: addReviewById
+			addReviewById: addReviewById,
+			addLocation: addLocation
 		};
 	};
 
